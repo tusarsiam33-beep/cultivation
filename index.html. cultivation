@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cultivation">
+  <title>Trinity Cultivation</title>
+  
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(18, 21, 31, 0.95);
+      --c1: #e63946;
+      --c2: #fca311;
+      --c3: #00b4d8;
+      --text: #e0e1dd;
+      --muted: #8d99ae;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 5%, #181d2c 0%, var(--bg) 95%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      padding-bottom: 50px;
+    }
+
+    header {
+      text-align: center;
+      margin: 12px 0 20px 0;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .c1 { border-top: 3px solid var(--c1); }
+    .c2 { border-top: 3px solid var(--c2); }
+    .c3 { border-top: 3px solid var(--c3); }
+
+    .soul-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    .soul-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .c1 .soul-title { color: var(--c1); }
+    .c2 .soul-title { color: var(--c2); }
+    .c3 .soul-title { color: var(--c3); }
+
+    .realm-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .current-realm {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .next-realm {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 6px;
+      transition: width 0.3s;
+    }
+    .c1 .progress-bar-fill { background: var(--c1); }
+    .c2 .progress-bar-fill { background: var(--c2); }
+    .c3 .progress-bar-fill { background: var(--c3); }
+
+    .timer-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .meditate-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .breakthrough-btn {
+      background: #1f2330;
+      color: #666;
+    }
+
+    .breakthrough-btn.ready {
+      background: #06d6a0;
+      color: #032b1f;
+      box-shadow: 0 0 12px rgba(6, 214, 160, 0.7);
+    }
+
+    .chamber-box {
+      margin-top: 25px;
+      background: rgba(18, 21, 31, 0.6);
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+    }
+
+    .chamber-box h4 {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .chamber-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .chamber-btn {
+      background: #1b2030;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #abb3c4;
+      font-size: 0.75rem;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Trinity Body</h1>
+    <div class="subtitle">3 Souls &bull; 1 Body &bull; 10-Day Breakthroughs</div>
+  </header>
+
+  <main class="grid">
+    <!-- Consciousness 1: Reverend Insanity -->
+    <div class="card c1">
+      <div>
+        <div class="soul-tag">1st Soul &bull; Gu Demon Path</div>
+        <div class="soul-title">Abyssal Gu Venerable</div>
+      </div>
+      <div class="realm-box">
+        <div class="current-realm" id="c1-cur">Rank 1 Gu Master</div>
+        <div class="next-realm" id="c1-next">Next: Rank 2 Gu Master</div>
+      </div>
+      <div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="c1-bar"></div></div>
+        <div class="timer-info">
+          <span id="c1-pct">0.0%</span>
+          <span id="c1-timer">10d 00h 00m</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="meditate-btn" onclick="meditate(0)">Meditate (+2h)</button>
+        <button class="breakthrough-btn" id="c1-btn" onclick="breakthrough(0)">Breakthrough</button>
+      </div>
+    </div>
+
+    <!-- Consciousness 2: BTTH / Great Ruler -->
+    <div class="card c2">
+      <div>
+        <div class="soul-tag">2nd Soul &bull; Dou Dao Sovereign</div>
+        <div class="soul-title">Flame Ruler Lineage</div>
+      </div>
+      <div class="realm-box">
+        <div class="current-realm" id="c2-cur">Dou Zhi Qi</div>
+        <div class="next-realm" id="c2-next">Next: Dou Zhe</div>
+      </div>
+      <div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="c2-bar"></div></div>
+        <div class="timer-info">
+          <span id="c2-pct">0.0%</span>
+          <span id="c2-timer">10d 00h 00m</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="meditate-btn" onclick="meditate(1)">Meditate (+2h)</button>
+        <button class="breakthrough-btn" id="c2-btn" onclick="breakthrough(1)">Breakthrough</button>
+      </div>
+    </div>
+
+    <!-- Consciousness 3: Renegade Immortal -->
+    <div class="card c3">
+      <div>
+        <div class="soul-tag">3rd Soul &bull; Four-Step Dao</div>
+        <div class="soul-title">Ancient Slaughter Will</div>
+      </div>
+      <div class="realm-box">
+        <div class="current-realm" id="c3-cur">Qi Condensation (15 Layers)</div>
+        <div class="next-realm" id="c3-next">Next: Foundation Establishment</div>
+      </div>
+      <div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="c3-bar"></div></div>
+        <div class="timer-info">
+          <span id="c3-pct">0.0%</span>
+          <span id="c3-timer">10d 00h 00m</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="meditate-btn" onclick="meditate(2)">Meditate (+2h)</button>
+        <button class="breakthrough-btn" id="c3-btn" onclick="breakthrough(2)">Breakthrough</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Testing Controls -->
+  <aside class="chamber-box">
+    <h4>Time Chamber (Fast-Forward)</h4>
+    <div class="chamber-btns">
+      <button class="chamber-btn" onclick="fastForward(1)">+1 Day</button>
+      <button class="chamber-btn" onclick="fastForward(10)">+10 Days</button>
+      <button class="chamber-btn" onclick="setTimerScale(10)">10s per Realm</button>
+      <button class="chamber-btn" onclick="setTimerScale(864000)">10d per Realm</button>
+      <button class="chamber-btn" style="grid-column: span 2;" onclick="resetAll()">Reset All Progress</button>
+    </div>
+  </aside>
+
+  <script>
+    const SYSTEMS = [
+      {
+        ranks: [
+          "Rank 1 Gu Master", "Rank 2 Gu Master", "Rank 3 Gu Master", 
+          "Rank 4 Gu Master", "Rank 5 Gu Master", "Rank 6 Gu Immortal", 
+          "Rank 7 Gu Immortal", "Rank 8 Gu Immortal", "Rank 9 Earth Refining Demon Venerable"
+        ]
+      },
+      {
+        ranks: [
+          "Dou Zhi Qi", "Dou Zhe", "Dou Shi", "Da Dou Shi", "Dou Ling", 
+          "Dou Wang", "Dou Huang", "Dou Zong", "Dou Zun", "Ban Sheng", 
+          "Dou Sheng", "Dou Di / Sovereign", "Earthly Sovereign", 
+          "Heavenly Sovereign", "Ranker", "The Great Ruler"
+        ]
+      },
+      {
+        ranks: [
+          "Qi Condensation (15 Layers)", "Foundation Establishment", "Core Formation", 
+          "Nascent Soul", "Soul Formation", "Soul Transformation", "Ascendant",
+          "Illusory Yin", "Corporeal Yang", "Nirvana Scryer", "Nirvana Cleanser", 
+          "Nirvana Shatterer", "Heaven's Blight (Five Blights 1-5)", 
+          "Great Void Gate (Threshold)", "Nirvana Void", "Spirit Void", 
+          "Arcane Void", "Void Tribulant", "Half Heaven Trampling", 
+          "Nine Heaven Trampling Bridges", "Heaven Trampling (Fourth Step)"
+        ]
+      }
+    ];
+
+    let STAGE_DURATION_MS = parseInt(localStorage.getItem("cult_dur") || (10 * 24 * 60 * 60 * 1000));
+    let state = JSON.parse(localStorage.getItem("cult_state")) || [
+      { rankIdx: 0, startTime: Date.now() },
+      { rankIdx: 0, startTime: Date.now() },
+      { rankIdx: 0, startTime: Date.now() }
+    ];
+
+    function save() {
+      localStorage.setItem("cult_state", JSON.stringify(state));
+      localStorage.setItem("cult_dur", STAGE_DURATION_MS.toString());
+    }
+
+    function formatTime(ms) {
+      if (ms <= 0) return "Ready!";
+      const sec = Math.floor(ms / 1000);
+      const d = Math.floor(sec / 86400);
+      const h = Math.floor((sec % 86400) / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      return `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    }
+
+    function update() {
+      const now = Date.now();
+      state.forEach((s, i) => {
+        const ranks = SYSTEMS[i].ranks;
+        const isMax = s.rankIdx >= ranks.length - 1;
+
+        const curEl = document.getElementById(`c${i+1}-cur`);
+        const nextEl = document.getElementById(`c${i+1}-next`);
+        const barEl = document.getElementById(`c${i+1}-bar`);
+        const pctEl = document.getElementById(`c${i+1}-pct`);
+        const timerEl = document.getElementById(`c${i+1}-timer`);
+        const btnEl = document.getElementById(`c${i+1}-btn`);
+
+        curEl.innerText = ranks[s.rankIdx];
+
+        if (isMax) {
+          nextEl.innerText = "Supreme Peak Reached";
+          barEl.style.width = "100%";
+          pctEl.innerText = "100%";
+          timerEl.innerText = "Dao Peak";
+          btnEl.innerText = "Maxed";
+          btnEl.className = "breakthrough-btn";
+          return;
+        }
+
+        nextEl.innerText = `Next: ${ranks[s.rankIdx + 1]}`;
+        const elapsed = now - s.startTime;
+        const progress = Math.min(1, Math.max(0, elapsed / STAGE_DURATION_MS));
+        const remaining = Math.max(0, STAGE_DURATION_MS - elapsed);
+
+        barEl.style.width = `${(progress * 100).toFixed(1)}%`;
+        pctEl.innerText = `${(progress * 100).toFixed(1)}%`;
+        timerEl.innerText = formatTime(remaining);
+
+        if (progress >= 1) {
+          btnEl.innerText = "Breakthrough!";
+          btnEl.className = "breakthrough-btn ready";
+        } else {
+          btnEl.innerText = "Cultivating...";
+          btnEl.className = "breakthrough-btn";
+        }
+      });
+    }
+
+    function breakthrough(i) {
+      if ((Date.now() - state[i].startTime) >= STAGE_DURATION_MS && state[i].rankIdx < SYSTEMS[i].ranks.length - 1) {
+        state[i].rankIdx++;
+        state[i].startTime = Date.now();
+        save();
+        update();
+      }
+    }
+
+    function meditate(i) {
+      state[i].startTime -= (2 * 60 * 60 * 1000);
+      save();
+      update();
+    }
+
+    function fastForward(days) {
+      state.forEach(s => s.startTime -= (days * 24 * 60 * 60 * 1000));
+      save();
+      update();
+    }
+
+    function setTimerScale(seconds) {
+      STAGE_DURATION_MS = seconds * 1000;
+      state.forEach(s => s.startTime = Date.now());
+      save();
+      update();
+    }
+
+    function resetAll() {
+      if (confirm("Reset all 3 cultivation paths?")) {
+        state = [{ rankIdx: 0, startTime: Date.now() }, { rankIdx: 0, startTime: Date.now() }, { rankIdx: 0, startTime: Date.now() }];
+        save();
+        update();
+      }
+    }
+
+    setInterval(update, 1000);
+    update();
+  </script>
+</body>
+          </html>

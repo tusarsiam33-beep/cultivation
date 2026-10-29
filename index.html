@@ -20,16 +20,13 @@
       --text: #e0e1dd;
       --muted: #8d99ae;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
-
     body {
       background: radial-gradient(circle at 50% 5%, #181d2c 0%, var(--bg) 95%);
       color: var(--text);
@@ -40,12 +37,10 @@
       padding: 16px;
       padding-bottom: 50px;
     }
-
     header {
       text-align: center;
       margin: 12px 0 20px 0;
     }
-
     header h1 {
       font-size: 1.6rem;
       letter-spacing: 2px;
@@ -54,13 +49,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .subtitle {
       font-size: 0.8rem;
       color: var(--muted);
       margin-top: 4px;
     }
-
     .grid {
       display: flex;
       flex-direction: column;
@@ -68,7 +61,6 @@
       width: 100%;
       max-width: 450px;
     }
-
     .card {
       background: var(--card-bg);
       border-radius: 14px;
@@ -79,18 +71,15 @@
       flex-direction: column;
       gap: 12px;
     }
-
     .c1 { border-top: 3px solid var(--c1); }
     .c2 { border-top: 3px solid var(--c2); }
     .c3 { border-top: 3px solid var(--c3); }
-
     .soul-tag {
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--muted);
     }
-
     .soul-title {
       font-size: 1.15rem;
       font-weight: 700;
@@ -98,25 +87,21 @@
     .c1 .soul-title { color: var(--c1); }
     .c2 .soul-title { color: var(--c2); }
     .c3 .soul-title { color: var(--c3); }
-
     .realm-box {
       background: rgba(0, 0, 0, 0.4);
       border-radius: 8px;
       padding: 10px 12px;
     }
-
     .current-realm {
       font-size: 1rem;
       font-weight: 600;
       color: #fff;
     }
-
     .next-realm {
       font-size: 0.75rem;
       color: var(--muted);
       margin-top: 3px;
     }
-
     .progress-bar-bg {
       background: rgba(255, 255, 255, 0.08);
       height: 8px;
@@ -124,7 +109,6 @@
       overflow: hidden;
       margin-bottom: 6px;
     }
-
     .progress-bar-fill {
       height: 100%;
       width: 0%;
@@ -134,19 +118,16 @@
     .c1 .progress-bar-fill { background: var(--c1); }
     .c2 .progress-bar-fill { background: var(--c2); }
     .c3 .progress-bar-fill { background: var(--c3); }
-
     .timer-info {
       display: flex;
       justify-content: space-between;
       font-size: 0.75rem;
       color: var(--muted);
     }
-
     .btn-group {
       display: flex;
       gap: 8px;
     }
-
     button {
       flex: 1;
       padding: 10px;
@@ -156,23 +137,19 @@
       font-size: 0.85rem;
       cursor: pointer;
     }
-
     .meditate-btn {
       background: rgba(255, 255, 255, 0.08);
       color: var(--text);
     }
-
     .breakthrough-btn {
       background: #1f2330;
       color: #666;
     }
-
     .breakthrough-btn.ready {
       background: #06d6a0;
       color: #032b1f;
       box-shadow: 0 0 12px rgba(6, 214, 160, 0.7);
     }
-
     .chamber-box {
       margin-top: 25px;
       background: rgba(18, 21, 31, 0.6);
@@ -182,19 +159,16 @@
       max-width: 450px;
       text-align: center;
     }
-
     .chamber-box h4 {
       font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 10px;
     }
-
     .chamber-btns {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
-
     .chamber-btn {
       background: #1b2030;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -212,7 +186,7 @@
   </header>
 
   <main class="grid">
-    <!-- Consciousness 1: Reverend Insanity -->
+    <!-- Consciousness 1 -->
     <div class="card c1">
       <div>
         <div class="soul-tag">1st Soul &bull; Gu Demon Path</div>
@@ -231,11 +205,11 @@
       </div>
       <div class="btn-group">
         <button class="meditate-btn" onclick="meditate(0)">Meditate (+2h)</button>
-        <button class="breakthrough-btn" id="c1-btn" onclick="breakthrough(0)">Breakthrough</button>
+        <button class="breakthrough-btn" id="c1-btn" onclick="breakthrough(0)">Cultivating...</button>
       </div>
     </div>
 
-    <!-- Consciousness 2: BTTH / Great Ruler -->
+    <!-- Consciousness 2 -->
     <div class="card c2">
       <div>
         <div class="soul-tag">2nd Soul &bull; Dou Dao Sovereign</div>
@@ -254,11 +228,11 @@
       </div>
       <div class="btn-group">
         <button class="meditate-btn" onclick="meditate(1)">Meditate (+2h)</button>
-        <button class="breakthrough-btn" id="c2-btn" onclick="breakthrough(1)">Breakthrough</button>
+        <button class="breakthrough-btn" id="c2-btn" onclick="breakthrough(1)">Cultivating...</button>
       </div>
     </div>
 
-    <!-- Consciousness 3: Renegade Immortal -->
+    <!-- Consciousness 3 -->
     <div class="card c3">
       <div>
         <div class="soul-tag">3rd Soul &bull; Four-Step Dao</div>
@@ -277,12 +251,11 @@
       </div>
       <div class="btn-group">
         <button class="meditate-btn" onclick="meditate(2)">Meditate (+2h)</button>
-        <button class="breakthrough-btn" id="c3-btn" onclick="breakthrough(2)">Breakthrough</button>
+        <button class="breakthrough-btn" id="c3-btn" onclick="breakthrough(2)">Cultivating...</button>
       </div>
     </div>
   </main>
 
-  <!-- Testing Controls -->
   <aside class="chamber-box">
     <h4>Time Chamber (Fast-Forward)</h4>
     <div class="chamber-btns">
@@ -324,20 +297,38 @@
       }
     ];
 
-    let STAGE_DURATION_MS = parseInt(localStorage.getItem("cult_dur") || (10 * 24 * 60 * 60 * 1000));
-    let state = JSON.parse(localStorage.getItem("cult_state")) || [
-      { rankIdx: 0, startTime: Date.now() },
-      { rankIdx: 0, startTime: Date.now() },
-      { rankIdx: 0, startTime: Date.now() }
-    ];
+    // --- ROCK SOLID PERSISTENCE LOGIC ---
+    let STAGE_DURATION_MS = parseInt(localStorage.getItem("trinity_dur_v2"));
+    if (!STAGE_DURATION_MS) {
+      STAGE_DURATION_MS = 10 * 24 * 60 * 60 * 1000;
+      localStorage.setItem("trinity_dur_v2", STAGE_DURATION_MS.toString());
+    }
+
+    let state;
+    try {
+      state = JSON.parse(localStorage.getItem("trinity_state_v2"));
+    } catch(e) {
+      state = null;
+    }
+
+    // If never initialized before, lock in the exact start timestamps RIGHT NOW:
+    if (!state || !Array.isArray(state) || state.length !== 3) {
+      const now = Date.now();
+      state = [
+        { rankIdx: 0, startTime: now },
+        { rankIdx: 0, startTime: now },
+        { rankIdx: 0, startTime: now }
+      ];
+      localStorage.setItem("trinity_state_v2", JSON.stringify(state));
+    }
 
     function save() {
-      localStorage.setItem("cult_state", JSON.stringify(state));
-      localStorage.setItem("cult_dur", STAGE_DURATION_MS.toString());
+      localStorage.setItem("trinity_state_v2", JSON.stringify(state));
+      localStorage.setItem("trinity_dur_v2", STAGE_DURATION_MS.toString());
     }
 
     function formatTime(ms) {
-      if (ms <= 0) return "Ready!";
+      if (ms <= 0) return "Ready for Breakthrough!";
       const sec = Math.floor(ms / 1000);
       const d = Math.floor(sec / 86400);
       const h = Math.floor((sec % 86400) / 3600);
@@ -391,7 +382,8 @@
     }
 
     function breakthrough(i) {
-      if ((Date.now() - state[i].startTime) >= STAGE_DURATION_MS && state[i].rankIdx < SYSTEMS[i].ranks.length - 1) {
+      const elapsed = Date.now() - state[i].startTime;
+      if (elapsed >= STAGE_DURATION_MS && state[i].rankIdx < SYSTEMS[i].ranks.length - 1) {
         state[i].rankIdx++;
         state[i].startTime = Date.now();
         save();
@@ -420,7 +412,12 @@
 
     function resetAll() {
       if (confirm("Reset all 3 cultivation paths?")) {
-        state = [{ rankIdx: 0, startTime: Date.now() }, { rankIdx: 0, startTime: Date.now() }, { rankIdx: 0, startTime: Date.now() }];
+        const now = Date.now();
+        state = [
+          { rankIdx: 0, startTime: now },
+          { rankIdx: 0, startTime: now },
+          { rankIdx: 0, startTime: now }
+        ];
         save();
         update();
       }
@@ -430,4 +427,4 @@
     update();
   </script>
 </body>
-  </html>
+</html>
